@@ -117,6 +117,9 @@
     flex-direction: column;
     align-items: center;
     gap: 14px;
+    width: 100%;
+    max-width: 520px;
+    padding: 0 6px;
   }
 
   /* 标题 */
@@ -190,11 +193,14 @@
       0 14px 40px rgba(0,0,0,0.35),
       inset 0 0 60px rgba(0,0,0,0.05);
     overflow: hidden;
+    max-width: 100%;
   }
 
   canvas {
     display: block;
     border-radius: 6px;
+    max-width: 100%;
+    height: auto;
   }
 
   /* 管道装饰 */
@@ -349,13 +355,32 @@
     .mobile-controls { display: flex; }
     .title { font-size: 16px; }
     .btn { font-size: 9px; padding: 10px 14px; }
-    .info-box { padding: 6px 10px; }
-    .info-box .value { font-size: 12px; }
-    .info-box .label { font-size: 7px; }
-    .info-panel { gap: 6px; }
+    .info-box { padding: 4px 8px; }
+    .info-box .value { font-size: 11px; }
+    .info-box .label { font-size: 6px; }
+    .info-panel { gap: 4px; }
     .pipe-decor { display: none; }
     .piranha { display: none; }
     .hills { display: none; }
+    .game-container { border-width: 5px; border-radius: 10px; }
+    .game-wrapper { gap: 8px; padding: 0 4px; }
+    .overlay .big-text { font-size: 16px; }
+    .overlay .sub-text { font-size: 10px; }
+    .overlay .mode-btns { gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .leaderboard-panel { max-width: 100%; margin: 0 4px; }
+    .name-input { font-size: 11px; padding: 8px 12px; max-width: 180px; }
+  }
+
+  @media (max-width: 400px) {
+    .title { font-size: 13px; }
+    .btn { font-size: 8px; padding: 8px 10px; }
+    .info-box { padding: 3px 6px; min-width: 50px; }
+    .info-box .value { font-size: 10px; }
+    .info-box .label { font-size: 5px; }
+    .dpad button { font-size: 18px; }
+    .dpad { grid-template-columns: 46px 46px 46px; grid-template-rows: 46px 46px 46px; }
+    .overlay .big-text { font-size: 13px; }
+    .overlay .sub-text { font-size: 8px; }
   }
 
   /* 覆盖层 */
@@ -429,6 +454,127 @@
   }
   .badge-speed  { background: #e83030; }
   .badge-star   { background: #f0a000; }
+
+  /* 玩家名称输入 */
+  .name-input {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 13px;
+    padding: 10px 16px;
+    border: 3px solid #5c2a00;
+    border-radius: 8px;
+    background: #fff;
+    color: #3e2000;
+    text-align: center;
+    letter-spacing: 1px;
+    outline: none;
+    width: 200px;
+    box-shadow: 0 4px 0 #5c2a00;
+    transition: all 0.1s ease;
+  }
+  .name-input:focus {
+    border-color: #ffd700;
+    box-shadow: 0 4px 0 #b89600, 0 0 12px rgba(255,215,0,0.4);
+  }
+  .name-input::placeholder {
+    color: #c8b898;
+    font-size: 10px;
+  }
+  .name-input.hidden { display: none; }
+
+  /* 关卡进度提示 */
+  .progress-info {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 9px;
+    color: #ffd700;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  /* 排行榜面板 */
+  .leaderboard-toggle {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    padding: 8px 16px;
+    border: 2px solid #5c2a00;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #f0a000 0%, #c87800 100%);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #8b5e00;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+    transition: all 0.06s ease;
+    letter-spacing: 1px;
+  }
+  .leaderboard-toggle:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #8b5e00;
+  }
+
+  .leaderboard-panel {
+    background: rgba(0,0,0,0.85);
+    border: 3px solid #ffd700;
+    border-radius: 12px;
+    padding: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  }
+  .leaderboard-panel h3 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    color: #ffd700;
+    text-align: center;
+    margin-bottom: 12px;
+    text-shadow: 2px 2px 0 #000;
+  }
+  .leaderboard-panel table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .leaderboard-panel th,
+  .leaderboard-panel td {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    color: #fff;
+    padding: 6px 4px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .leaderboard-panel th {
+    color: #ffd700;
+    font-size: 7px;
+    border-bottom: 2px solid rgba(255,215,0,0.4);
+  }
+  .leaderboard-panel .rank-1 { color: #ffd700; }
+  .leaderboard-panel .rank-2 { color: #c0c0c0; }
+  .leaderboard-panel .rank-3 { color: #cd7f32; }
+  .leaderboard-panel .no-data {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 9px;
+    color: #888;
+    text-align: center;
+    padding: 12px 0;
+  }
+  .leaderboard-panel .clear-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 7px;
+    padding: 6px 12px;
+    border: 1px solid #888;
+    border-radius: 4px;
+    background: transparent;
+    color: #888;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.1s ease;
+  }
+  .leaderboard-panel .clear-btn:hover {
+    border-color: #e83030;
+    color: #e83030;
+  }
+  .leaderboard-panel.hidden { display: none; }
 </style>
 </head>
 <body>
@@ -497,10 +643,13 @@
 
     <div class="overlay" id="startOverlay">
       <div class="big-text">🐍 贪吃蛇<br>马力欧大冒险</div>
-      <div class="sub-text">请选择游戏模式</div>
+      <input class="name-input" id="playerNameInput" type="text" placeholder="输入玩家名称" maxlength="10" autocomplete="off">
+      <div class="progress-info" id="progressInfo"></div>
+      <div class="sub-text" id="startSubText">请选择游戏模式</div>
       <div class="mode-btns">
-        <button class="btn btn-green" onclick="startGame('classic')">经典模式</button>
-        <button class="btn btn-blue" onclick="startGame('timed')">限时挑战</button>
+        <button class="btn btn-green" id="btnContinue" style="display:none" onclick="startGame('classic', true)">▶ 继续冒险</button>
+        <button class="btn btn-green" onclick="startGame('classic', false)">经典模式</button>
+        <button class="btn btn-blue" onclick="startGame('timed', false)">限时挑战</button>
       </div>
     </div>
     <div class="overlay hidden" id="pauseOverlay">
@@ -510,9 +659,11 @@
     <div class="overlay hidden" id="gameOverOverlay">
       <div class="big-text" id="gameOverTitle">游戏结束!</div>
       <div class="sub-text" id="gameOverDetail"></div>
+      <input class="name-input hidden" id="gameOverNameInput" type="text" placeholder="输入名称保存分数" maxlength="10" autocomplete="off">
       <div class="mode-btns">
-        <button class="btn btn-green" onclick="startGame('classic')">经典模式</button>
-        <button class="btn btn-blue" onclick="startGame('timed')">限时挑战</button>
+        <button class="btn btn-green" id="btnSaveScore" style="display:none" onclick="saveScoreAndRestart()">💾 保存并重玩</button>
+        <button class="btn btn-green" onclick="startGame('classic', false)">经典模式</button>
+        <button class="btn btn-blue" onclick="startGame('timed', false)">限时挑战</button>
       </div>
     </div>
   </div>
@@ -521,6 +672,16 @@
     <button class="btn btn-green" onclick="startGame('classic')">▶ 经典</button>
     <button class="btn btn-blue" onclick="startGame('timed')">⏱ 限时</button>
     <button class="btn btn-yellow" onclick="togglePause()">⏸ 暂停</button>
+  </div>
+
+  <button class="leaderboard-toggle" id="leaderboardToggle" onclick="toggleLeaderboard()">🏆 排行榜</button>
+  <div class="leaderboard-panel hidden" id="leaderboardPanel">
+    <h3>🏆 荣誉榜</h3>
+    <table>
+      <thead><tr><th>排名</th><th>玩家</th><th>分数</th><th>关卡</th><th>模式</th></tr></thead>
+      <tbody id="leaderboardBody"><tr><td colspan="5" class="no-data">暂无记录</td></tr></tbody>
+    </table>
+    <button class="clear-btn" onclick="clearLeaderboard()">清除记录</button>
   </div>
 
   <div class="mobile-controls">
@@ -614,8 +775,94 @@ function sfxStart(){ beep(523,0.08); setTimeout(()=>beep(659,0.08),100); setTime
 highScore = parseInt(localStorage.getItem('snakeMarioHighScore')) || 0;
 document.getElementById('highScore').textContent = highScore;
 
+// ==================== 排行榜 ====================
+function loadLeaderboard() {
+  try {
+    return JSON.parse(localStorage.getItem('snakeMarioLeaderboard')) || [];
+  } catch(e) {
+    return [];
+  }
+}
+function saveLeaderboard(data) {
+  localStorage.setItem('snakeMarioLeaderboard', JSON.stringify(data));
+}
+function addToLeaderboard(name, score, level, mode) {
+  const lb = loadLeaderboard();
+  lb.push({
+    name: name.substring(0, 10),
+    score: score,
+    level: level,
+    mode: mode === 'timed' ? '限时' : '经典',
+    date: new Date().toLocaleDateString('zh-CN')
+  });
+  lb.sort((a, b) => b.score - a.score);
+  if (lb.length > 50) lb.length = 50;
+  saveLeaderboard(lb);
+  return lb.findIndex(e => e.score === score && e.name === name.substring(0, 10)) + 1;
+}
+function renderLeaderboard() {
+  const lb = loadLeaderboard();
+  const tbody = document.getElementById('leaderboardBody');
+  if (lb.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="no-data">暂无记录</td></tr>';
+    return;
+  }
+  tbody.innerHTML = lb.slice(0, 20).map((e, i) => {
+    const rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : '';
+    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1);
+    return `<tr>
+      <td class="${rankClass}">${medal}</td>
+      <td>${escapeHtml(e.name)}</td>
+      <td>${e.score}</td>
+      <td>${e.level}</td>
+      <td>${e.mode}</td>
+    </tr>`;
+  }).join('');
+}
+function escapeHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+function toggleLeaderboard() {
+  const panel = document.getElementById('leaderboardPanel');
+  panel.classList.toggle('hidden');
+  if (!panel.classList.contains('hidden')) {
+    renderLeaderboard();
+  }
+}
+function clearLeaderboard() {
+  if (confirm('确定要清除所有排行记录吗？')) {
+    localStorage.removeItem('snakeMarioLeaderboard');
+    renderLeaderboard();
+  }
+}
+
+// ==================== 关卡进度 ====================
+function getUnlockedLevel() {
+  return parseInt(localStorage.getItem('snakeMarioUnlockedLevel')) || 1;
+}
+function saveUnlockedLevel(lv) {
+  const current = getUnlockedLevel();
+  if (lv > current) {
+    localStorage.setItem('snakeMarioUnlockedLevel', lv);
+  }
+}
+function updateProgressInfo() {
+  const ul = getUnlockedLevel();
+  const el = document.getElementById('progressInfo');
+  const continueBtn = document.getElementById('btnContinue');
+  if (ul > 1) {
+    el.textContent = '🎌 已解锁至第 ' + ul + ' 关';
+    continueBtn.style.display = '';
+  } else {
+    el.textContent = '';
+    continueBtn.style.display = 'none';
+  }
+}
+
 // ==================== 初始化 ====================
-function initState(mode) {
+function initState(mode, continueFromSave) {
   const cx = Math.floor(COLS/2), cy = Math.floor(ROWS/2);
   snake = [{x:cx,y:cy},{x:cx-1,y:cy},{x:cx-2,y:cy}];
   direction = {x:1,y:0};
@@ -623,9 +870,9 @@ function initState(mode) {
   aiSnake = [];
   obstacles = [];
   score = 0;
-  level = 1;
-  speed = 150;
-  baseSpeed = 150;
+  level = continueFromSave ? getUnlockedLevel() : 1;
+  baseSpeed = Math.max(70, 150 - (level - 1) * 12);
+  speed = baseSpeed;
   gameMode = mode;
   timeRemaining = 60;
   combo = 0;
@@ -640,11 +887,19 @@ function initState(mode) {
   food = null;
 
   document.getElementById('score').textContent = '0';
-  document.getElementById('level').textContent = '1';
+  document.getElementById('level').textContent = level;
   document.getElementById('comboBox').classList.add('hidden');
   document.getElementById('timerBox').classList.toggle('hidden', mode !== 'timed');
   document.getElementById('invBox').classList.add('hidden');
   document.getElementById('powerupIndicator').innerHTML = '';
+
+  // 如果从高关卡开始，生成障碍物和AI蛇
+  if (level > 1) {
+    generateObstacles();
+  }
+  if (level >= 4) {
+    spawnAiSnake();
+  }
 
   placeFood();
 }
@@ -711,6 +966,9 @@ function levelUp() {
   // 重新设置游戏循环速度
   if (gameLoop) clearInterval(gameLoop);
   gameLoop = setInterval(step, speed);
+
+  // 保存关卡进度
+  saveUnlockedLevel(level);
 
   // 第4关开始出现AI蛇
   if (level >= 4 && aiSnake.length === 0 && aiRespawnCountdown <= 0) {
@@ -1021,8 +1279,26 @@ function gameOver(reason) {
   document.getElementById('gameOverDetail').innerHTML =
     reason + '<br>得分: ' + score + ' | 关卡: ' + level +
     (gameMode === 'timed' ? '<br>⏱ 时间耗尽!' : '');
+
+  // 预填玩家名称并显示保存按钮
+  const nameInput = document.getElementById('playerNameInput');
+  const gameOverInput = document.getElementById('gameOverNameInput');
+  if (nameInput.value.trim()) {
+    gameOverInput.value = nameInput.value.trim();
+    gameOverInput.classList.remove('hidden');
+    document.getElementById('btnSaveScore').style.display = '';
+  } else {
+    gameOverInput.classList.remove('hidden');
+    gameOverInput.value = '';
+    gameOverInput.placeholder = '输入名称保存分数';
+    document.getElementById('btnSaveScore').style.display = '';
+  }
+
   document.getElementById('gameOverOverlay').classList.remove('hidden');
   document.getElementById('powerupIndicator').innerHTML = '';
+
+  // 更新关卡进度显示
+  updateProgressInfo();
   draw();
 }
 
@@ -1455,12 +1731,12 @@ function draw() {
 }
 
 // ==================== 游戏控制 ====================
-function startGame(mode) {
+function startGame(mode, continueFromSave) {
   initAudio();
   if (gameLoop) clearInterval(gameLoop);
   if (timerInterval) clearInterval(timerInterval);
 
-  initState(mode);
+  initState(mode, continueFromSave);
   gameRunning = true;
   gamePaused = false;
 
@@ -1469,6 +1745,8 @@ function startGame(mode) {
   document.getElementById('gameOverOverlay').classList.add('hidden');
   document.getElementById('invBox').classList.add('hidden');
   document.getElementById('powerupIndicator').innerHTML = '';
+  document.getElementById('gameOverNameInput').classList.add('hidden');
+  document.getElementById('btnSaveScore').style.display = 'none';
 
   if (mode === 'timed') {
     document.getElementById('timerBox').classList.remove('hidden');
@@ -1538,13 +1816,29 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// ==================== 保存分数并重玩 ====================
+function saveScoreAndRestart() {
+  const input = document.getElementById('gameOverNameInput');
+  const name = input.value.trim();
+  if (name) {
+    addToLeaderboard(name, score, level, gameMode);
+    // 同步名称到主输入框
+    document.getElementById('playerNameInput').value = name;
+  }
+  startGame(gameMode || 'classic', false);
+}
+
 // ==================== 全局函数暴露 ====================
 window.changeDir = changeDir;
 window.startGame = startGame;
 window.togglePause = togglePause;
+window.saveScoreAndRestart = saveScoreAndRestart;
+window.toggleLeaderboard = toggleLeaderboard;
+window.clearLeaderboard = clearLeaderboard;
 
 // ==================== 初始渲染 ====================
 initState('classic');
+updateProgressInfo();
 draw();
 
 // 计时器闪烁动画（动态注入）
